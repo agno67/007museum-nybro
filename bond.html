@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>James Bond 007 Museum — Nybro, Sweden</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8D08A;
+    --gold-dark: #8B6914;
+    --black: #080808;
+    --near-black: #0F0F0F;
+    --dark: #141414;
+    --dark-mid: #1C1C1C;
+    --mid: #2A2A2A;
+    --light-mid: #3A3A3A;
+    --muted: #888;
+    --off-white: #F5F0E8;
+    --white: #FAFAF8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--off-white);
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 200;
+    letter-spacing: 0.04em;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ─────────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.4rem 3rem;
+    background: linear-gradient(to bottom, rgba(8,8,8,0.95) 0%, rgba(8,8,8,0) 100%);
+    transition: background 0.4s;
+  }
+  nav.scrolled { background: rgba(8,8,8,0.97); border-bottom: 1px solid rgba(201,168,76,0.15); }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .nav-logo span { font-style: italic; color: var(--off-white); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.7rem;
+    font-weight: 300;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── HERO ─────────────────────────────────────── */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 680px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 60%, rgba(201,168,76,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 30%, rgba(201,168,76,0.05) 0%, transparent 50%),
+      var(--black);
+  }
+
+  .hero-lines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 79px,
+        rgba(201,168,76,0.04) 79px,
+        rgba(201,168,76,0.04) 80px
+      );
+  }
+
+  .gun-barrel {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.08);
+    animation: pulse-ring 4s ease-in-out infinite;
+  }
+  .gun-barrel::before {
+    content: '';
+    position: absolute;
+    top: 5%; left: 5%; right: 5%; bottom: 5%;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.05);
+    animation: pulse-ring 4s ease-in-out infinite 0.5s;
+  }
+  .gun-barrel::after {
+    content: '';
+    position: absolute;
+    top: 15%; left: 15%; right: 15%; bottom: 15%;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.04);
+  }
+
+  @keyframes pulse-ring {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.01); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 2rem;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.65rem;
+    font-weight: 300;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.8rem;
+    animation: fadeUp 1s ease 0.2s both;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 0.3rem;
+    animation: fadeUp 1s ease 0.4s both;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(245,240,232,0.5);
+    letter-spacing: 0.08em;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+    animation: fadeUp 1s ease 0.6s both;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    animation: fadeUp 1s ease 0.8s both;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    text-decoration: none;
+    background: var(--gold);
+    color: var(--black);
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 1rem 2.4rem;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  .btn-ghost {
+    display: inline-block;
+    text-decoration: none;
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold);
+    font-size: 0.65rem;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 1rem 2.4rem;
+    transition: border-color 0.3s, color 0.3s, transform 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold-light); transform: translateY(-1px); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    animation: fadeUp 1s ease 1.2s both;
+  }
+  .hero-scroll span {
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollDrop 2s ease-in-out infinite;
+  }
+  @keyframes scrollDrop {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION COMMONS ─────────────────────────── */
+  section { position: relative; }
+
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 3rem;
+  }
+
+  .section-label {
+    font-size: 0.6rem;
+    font-weight: 300;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.1;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  .gold-rule {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 1.5rem 0;
+  }
+
+  /* ── INTRO STRIP ─────────────────────────────── */
+  .intro-strip {
+    background: var(--dark);
+    border-top: 1px solid rgba(201,168,76,0.15);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    padding: 2rem 0;
+  }
+  .intro-strip-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .strip-stat {
+    text-align: center;
+    flex: 1;
+    min-width: 120px;
+  }
+  .strip-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .strip-stat-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+  .strip-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(201,168,76,0.2);
+  }
+
+  /* ── ABOUT ───────────────────────────────────── */
+  .about-section {
+    padding: 9rem 0;
+    background: var(--near-black);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+  .about-text p {
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: rgba(245,240,232,0.65);
+    margin-bottom: 1.3rem;
+  }
+  .about-text p strong {
+    color: var(--gold);
+    font-weight: 300;
+  }
+
+  .about-image-wrap {
+    position: relative;
+  }
+  .about-img-frame {
+    position: relative;
+    padding-top: 125%;
+    background: var(--mid);
+    overflow: hidden;
+  }
+  .about-img-frame img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.7) contrast(1.05);
+    transition: transform 0.8s ease, filter 0.8s ease;
+  }
+  .about-img-frame:hover img { transform: scale(1.03); filter: saturate(0.9) contrast(1.05); }
+  .about-img-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.08) 0%, transparent 60%);
+  }
+  .img-corner {
+    position: absolute;
+    width: 30px; height: 30px;
+    border-color: var(--gold);
+    border-style: solid;
+    z-index: 2;
+  }
+  .img-corner.tl { top: -10px; left: -10px; border-width: 1px 0 0 1px; }
+  .img-corner.br { bottom: -10px; right: -10px; border-width: 0 1px 1px 0; }
+
+  /* ── COLLECTION GRID ─────────────────────────── */
+  .collection-section {
+    padding: 9rem 0;
+    background: var(--black);
+  }
+  .collection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+  }
+  .collection-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+  }
+  .collection-item {
+    position: relative;
+    padding-top: 70%;
+    overflow: hidden;
+    background: var(--dark-mid);
+    cursor: pointer;
+  }
+  .collection-item img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.6) brightness(0.85);
+    transition: transform 0.8s ease, filter 0.8s ease;
+  }
+  .collection-item:hover img {
+    transform: scale(1.06);
+    filter: saturate(0.9) brightness(1);
+  }
+  .collection-item-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(8,8,8,0.8) 0%, transparent 50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .collection-item:hover .collection-item-overlay { opacity: 1; }
+  .collection-item-tag {
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+  .collection-item-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--white);
+  }
+  .collection-item.large {
+    grid-column: span 2;
+    padding-top: 45%;
+  }
+
+  /* ── FOUNDER ─────────────────────────────────── */
+  .founder-section {
+    padding: 9rem 0;
+    background: var(--dark);
+    border-top: 1px solid rgba(201,168,76,0.1);
+  }
+  .founder-grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 6rem;
+    align-items: start;
+  }
+  .founder-img-wrap {
+    position: relative;
+  }
+  .founder-img-frame {
+    position: relative;
+    padding-top: 130%;
+    background: var(--mid);
+    overflow: hidden;
+  }
+  .founder-img-frame img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    filter: saturate(0.5) contrast(1.1);
+    transition: filter 0.8s ease;
+  }
+  .founder-img-frame:hover img { filter: saturate(0.75) contrast(1.1); }
+  .founder-img-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 60%, rgba(8,8,8,0.5) 100%);
+    z-index: 1;
+  }
+  .founder-name-plate {
+    position: absolute;
+    bottom: -1px;
+    left: 0; right: 0;
+    background: rgba(8,8,8,0.9);
+    border-top: 1px solid rgba(201,168,76,0.3);
+    padding: 1rem 1.5rem;
+    z-index: 2;
+  }
+  .founder-name-plate strong {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+  }
+  .founder-name-plate span {
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .founder-quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    line-height: 0;
+    color: var(--gold);
+    opacity: 0.25;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .founder-bio p {
+    font-size: 0.88rem;
+    line-height: 2;
+    color: rgba(245,240,232,0.65);
+    margin-bottom: 1.2rem;
+  }
+  .founder-bio p strong {
+    color: var(--off-white);
+    font-weight: 300;
+  }
+  .founder-credentials {
+    margin-top: 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .credential-item {
+    border-left: 1px solid rgba(201,168,76,0.3);
+    padding-left: 1rem;
+  }
+  .credential-item strong {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    color: var(--gold);
+    font-weight: 300;
+  }
+  .credential-item span {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── TESTIMONIALS ────────────────────────────── */
+  .reviews-section {
+    padding: 9rem 0;
+    background: var(--near-black);
+    overflow: hidden;
+  }
+  .reviews-header { text-align: center; margin-bottom: 4rem; }
+  .reviews-header .gold-rule { margin: 1.5rem auto; }
+
+  .reviews-track-wrap {
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  }
+  .reviews-track {
+    display: flex;
+    gap: 1.5rem;
+    animation: marquee 40s linear infinite;
+    width: max-content;
+  }
+  .reviews-track:hover { animation-play-state: paused; }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .review-card {
+    background: var(--dark-mid);
+    border: 1px solid rgba(201,168,76,0.12);
+    padding: 2rem 2rem;
+    width: 340px;
+    flex-shrink: 0;
+  }
+  .review-stars {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 1rem;
+  }
+  .review-star {
+    width: 10px; height: 10px;
+    background: var(--gold);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
+  .review-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.7;
+    color: rgba(245,240,232,0.75);
+    margin-bottom: 1.2rem;
+  }
+  .review-author {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  /* ── VISIT INFO ──────────────────────────────── */
+  .visit-section {
+    padding: 9rem 0;
+    background: var(--black);
+  }
+  .visit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .visit-info-block {
+    background: var(--dark);
+    border: 1px solid rgba(201,168,76,0.12);
+    padding: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .visit-info-block h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+    font-style: italic;
+  }
+  .visit-info-block p {
+    font-size: 0.8rem;
+    line-height: 1.9;
+    color: rgba(245,240,232,0.6);
+  }
+  .visit-info-block p strong {
+    color: var(--off-white);
+    font-weight: 300;
+  }
+  .price-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--black);
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.5rem 1.2rem;
+    margin-top: 1rem;
+  }
+
+  .visit-contact a {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--off-white);
+    text-decoration: none;
+    transition: color 0.3s;
+    margin-bottom: 0.5rem;
+  }
+  .visit-contact a:hover { color: var(--gold); }
+
+  .map-placeholder {
+    position: relative;
+    padding-top: 60%;
+    background: var(--dark-mid);
+    border: 1px solid rgba(201,168,76,0.12);
+    overflow: hidden;
+  }
+  .map-placeholder iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    filter: grayscale(1) invert(0.85) contrast(0.9);
+    opacity: 0.7;
+  }
+  .map-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+  .map-pin {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 0 4px rgba(201,168,76,0.2), 0 0 0 8px rgba(201,168,76,0.1);
+    animation: pin-pulse 2s ease-in-out infinite;
+  }
+  @keyframes pin-pulse {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(201,168,76,0.2), 0 0 0 8px rgba(201,168,76,0.1); }
+    50% { box-shadow: 0 0 0 6px rgba(201,168,76,0.3), 0 0 0 14px rgba(201,168,76,0.08); }
+  }
+  .map-address-tag {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    background: rgba(8,8,8,0.9);
+    border-left: 2px solid var(--gold);
+    padding: 0.8rem 1.2rem;
+  }
+  .map-address-tag strong {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--gold);
+  }
+  .map-address-tag span {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* ── FOOTER ──────────────────────────────────── */
+  footer {
+    background: var(--near-black);
+    border-top: 1px solid rgba(201,168,76,0.15);
+    padding: 3rem 0;
+  }
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .footer-copy {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* ── DECORATIVE ──────────────────────────────── */
+  .gold-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10rem;
+    font-weight: 300;
+    color: rgba(201,168,76,0.04);
+    position: absolute;
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* ── RESPONSIVE ──────────────────────────────── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .section-inner { padding: 0 1.5rem; }
+    .intro-strip-inner { padding: 0 1.5rem; }
+    .footer-inner { padding: 0 1.5rem; }
+    .about-grid, .founder-grid, .visit-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .collection-grid { grid-template-columns: 1fr 1fr; }
+    .collection-item.large { grid-column: span 2; }
+    .hero-cta-group { flex-direction: column; align-items: center; }
+    .gun-barrel { width: 300px; height: 300px; }
+    .gold-number { display: none; }
+    .founder-credentials { grid-template-columns: 1fr; }
+    .collection-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .reviews-section, .founder-section, .about-section, .collection-section, .visit-section { padding: 5rem 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">James Bond <span>007</span> Museum</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#collection">Collection</a></li>
+    <li><a href="#founder">The Founder</a></li>
+    <li><a href="#visit">Plan Your Visit</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="gun-barrel"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Established 1965 &nbsp;·&nbsp; Nybro, Sweden</p>
+    <h1 class="hero-title">James Bond<br><em>007 Museum</em></h1>
+    <p class="hero-sub">The world's most unique Bond collection</p>
+    <div class="hero-cta-group">
+      <a href="#visit" class="btn-primary">Plan Your Visit</a>
+      <a href="#collection" class="btn-ghost">Explore Collection</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- INTRO STRIP -->
+<div class="intro-strip">
+  <div class="intro-strip-inner">
+    <div class="strip-stat">
+      <div class="strip-stat-num">1965</div>
+      <div class="strip-stat-label">Year Founded</div>
+    </div>
+    <div class="strip-divider"></div>
+    <div class="strip-stat">
+      <div class="strip-stat-num">60+</div>
+      <div class="strip-stat-label">Years of Collecting</div>
+    </div>
+    <div class="strip-divider"></div>
+    <div class="strip-stat">
+      <div class="strip-stat-num">007</div>
+      <div class="strip-stat-label">Official Museum Code</div>
+    </div>
+    <div class="strip-divider"></div>
+    <div class="strip-stat">
+      <div class="strip-stat-num">Unique</div>
+      <div class="strip-stat-label">One of a Kind, Worldwide</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="section-label">About the Museum</p>
+        <h2 class="section-title">A <em>once-in-a-lifetime</em><br>experience</h2>
+        <div class="gold-rule"></div>
+        <p>
+          Tucked away in the heart of <strong>Nybro, Sweden</strong>, the James Bond 007 Museum is an internationally recognized cultural phenomenon — and the most unique Bond destination on earth. Founded in 1965 by a man who would legally become James Bond himself, the museum holds artefacts, vehicles, props, and memorabilia found nowhere else in the world.
+        </p>
+        <p>
+          Whether you are a lifelong 007 devotee or simply curious, you will leave having experienced something <strong>truly extraordinary</strong>. Visitors consistently describe it as a highlight of their travels — an intimate, personal encounter with one man's singular obsession spanning more than six decades.
+        </p>
+        <p>
+          From iconic film vehicles and rare model cars to signed memorabilia and the legendary <strong>gondola from the films</strong>, every corner of this museum tells a story that no other institution in the world can tell.
+        </p>
+        <a href="#visit" class="btn-primary" style="margin-top: 1.5rem; display: inline-block;">Visit Us</a>
+      </div>
+      <div class="about-image-wrap">
+        <div class="about-img-frame">
+          <img src="frajer1.png" alt="James Bond Museum Aston Martin">
+          <div class="img-corner tl"></div>
+          <div class="img-corner br"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTION -->
+<section class="collection-section" id="collection">
+  <div class="section-inner">
+    <div class="collection-header">
+      <div>
+        <p class="section-label">The Collection</p>
+        <h2 class="section-title">Objects found<br><em>nowhere else</em></h2>
+      </div>
+      <p style="font-size: 0.75rem; color: var(--muted); max-width: 280px; line-height: 1.8; letter-spacing: 0.05em;">Vehicles, motorcycles, aircraft, memorabilia, costumes, model cars, video games, and rare film props — all gathered over a lifetime of passion.</p>
+    </div>
+    <div class="collection-grid">
+      <div class="collection-item large">
+        <img src="frajer4.png" alt="Aston Martin JB 007">
+        <div class="collection-item-overlay">
+          <div class="collection-item-tag">Vehicles</div>
+          <div class="collection-item-name">Aston Martin — JB 007</div>
+        </div>
+      </div>
+      <div class="collection-item">
+        <img src="frajer5.png" alt="Triumph Speed Triple RR 007 Edition">
+        <div class="collection-item-overlay">
+          <div class="collection-item-tag">Motorcycles</div>
+          <div class="collection-item-name">Triumph Speed Triple 1200 RR — 007 Edition</div>
+        </div>
+      </div>
+      <div class="collection-item">
+        <img src="frajer1.png" alt="Jaguar E-Type">
+        <div class="collection-item-overlay">
+          <div class="collection-item-tag">Classic Cars</div>
+          <div class="collection-item-name">Jaguar E-Type</div>
+        </div>
+      </div>
+      <div class="collection-item">
+        <img src="frajer3.png" alt="Aircraft & Aston Martin">
+        <div class="collection-item-overlay">
+          <div class="collection-item-tag">Aircraft</div>
+          <div class="collection-item-name">Cessna — On the Tarmac</div>
+        </div>
+      </div>
+      <div class="collection-item large">
+        <img src="frajer6.png" alt="Triumph Scrambler 007">
+        <div class="collection-item-overlay">
+          <div class="collection-item-tag">No Time To Die — Official</div>
+          <div class="collection-item-name">Triumph Scrambler 1200 — 007 Special Edition</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="founder-section" id="founder">
+  <span class="gold-number" style="right: -2rem; top: 4rem;">007</span>
+  <div class="section-inner">
+    <div style="text-align: center; margin-bottom: 5rem;">
+      <p class="section-label">Meet the Founder</p>
+      <h2 class="section-title">The Man Behind<br><em>the Legend</em></h2>
+      <div class="gold-rule" style="margin: 1.5rem auto;"></div>
+      <p style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem; color: rgba(245,240,232,0.5); max-width: 500px; margin: 0 auto;">A life dedicated to the world's most iconic secret agent</p>
+    </div>
+    <div class="founder-grid">
+      <div class="founder-img-wrap">
+        <div class="founder-img-frame">
+          <img src="frajer3.png" alt="Gunnar James Bond Schäfer">
+        </div>
+        <div class="founder-name-plate">
+          <strong>Gunnar "James Bond" Schäfer</strong>
+          <span>Founder & Director, Est. 1965</span>
+        </div>
+        <div class="img-corner tl"></div>
+      </div>
+      <div class="founder-bio">
+        <span class="founder-quote-mark">"</span>
+        <p>
+          Some obsessions define a life. For <strong>Gunnar Schäfer</strong> — officially and legally known as James Bond — his began in 1964 with a single film: <em>Goldfinger</em>. What followed was not merely a hobby, but a six-decade mission to build the world's most comprehensive and personal tribute to 007.
+        </p>
+        <p>
+          His museum in Nybro, Sweden is internationally recognized as a <strong>one-of-a-kind destination</strong> — housing rare memorabilia, a real Bond gondola, iconic film-related artefacts, vehicles, and objects found in no other museum on earth. Every piece has a story; Gunnar knows them all.
+        </p>
+        <p>
+          Sought out as a Bond authority by Swedish national radio — including <strong>P4 Kalmar and P4 Kronoberg</strong> — Gunnar has been the go-to expert for film releases including <em>Skyfall</em> and <em>Spectre</em>. He has personally visited Bond filming locations across the globe and has met <strong>every actor who has portrayed James Bond</strong>, including a personal encounter with Sir Roger Moore.
+        </p>
+        <p>
+          In 2023, Gunnar's remarkable story reached a global audience through his appearance in the documentary <strong><em>The Other Fellow</em> (2023)</strong> — a film exploring what it means to share a name with the world's most famous spy.
+        </p>
+        <p>
+          To visit the museum is to meet Gunnar himself. And that, as countless visitors attest, is the greatest part of all.
+        </p>
+        <div class="founder-credentials">
+          <div class="credential-item">
+            <strong>The Other Fellow, 2023</strong>
+            <span>Featured in the international documentary</span>
+          </div>
+          <div class="credential-item">
+            <strong>P4 Kalmar & Kronoberg</strong>
+            <span>Official Bond expert, Swedish national radio</span>
+          </div>
+          <div class="credential-item">
+            <strong>Roger Moore & All Bond Actors</strong>
+            <span>Personal meetings with every 007 portrayer</span>
+          </div>
+          <div class="credential-item">
+            <strong>60+ Years Collecting</strong>
+            <span>One of the world's great private collections</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section">
+  <div class="reviews-header section-inner">
+    <p class="section-label">Guest Impressions</p>
+    <h2 class="section-title">What Visitors <em>Say</em></h2>
+    <div class="gold-rule"></div>
+  </div>
+  <div class="reviews-track-wrap">
+    <div class="reviews-track" id="reviewTrack">
+      <!-- Cards rendered twice for seamless loop -->
+      <div class="review-card">
+        <div class="review-stars"><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div></div>
+        <p class="review-text">"Once in a lifetime experience. If you're in the vicinity and a certified Bond fan, definitely check it out. If you're not all about Bond, the owner will entertain you either way."</p>
+        <p class="review-author">— Verified Visitor</p>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div></div>
+        <p class="review-text">"Very special place. The owner's name is James Bond. He is very charming and nice, with a great personality and story. He has several cars, ships and even planes there."</p>
+        <p class="review-author">— Google Review</p>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div></div>
+        <p class="review-text">"Incredible place, what a treat! James, what a great person to meet and talk to and most of all to hear the story about his life and his unique collection. Strongly recommend."</p>
+        <p class="review-author">— Verified Visitor</p>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div></div>
+        <p class="review-text">"Every real James Bond fan should at least once in his lifetime visit this worldwide unique Exhibition. I have already visited it several times and am always impressed."</p>
+        <p class="review-author">— Repeat Visitor</p>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div></div>
+        <p class="review-text">"A very surprising museum for real James Bond fans, with an impressive story about the origin of the museum. Here you will find objects that you will not find in any other museum."</p>
+        <p class="review-author">— International Visitor</p>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div></div>
+        <p class="review-text">"It's a must see and hear experience. Very special and definitely worth a visit! The best one is the air ship from Die Another Day. A lot of very fancy details."</p>
+        <p class="review-author">— Verified Visitor</p>
+      </div>
+      <!-- Duplicate for loop -->
+      <div class="review-card">
+        <div class="review-stars"><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div></div>
+        <p class="review-text">"Once in a lifetime experience. If you're in the vicinity and a certified Bond fan, definitely check it out. If you're not all about Bond, the owner will entertain you either way."</p>
+        <p class="review-author">— Verified Visitor</p>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div></div>
+        <p class="review-text">"Very special place. The owner's name is James Bond. He is very charming and nice, with a great personality and story. He has several cars, ships and even planes there."</p>
+        <p class="review-author">— Google Review</p>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div></div>
+        <p class="review-text">"Incredible place, what a treat! James, what a great person to meet and talk to and most of all to hear the story about his life and his unique collection. Strongly recommend."</p>
+        <p class="review-author">— Verified Visitor</p>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div></div>
+        <p class="review-text">"Every real James Bond fan should at least once in his lifetime visit this worldwide unique Exhibition. I have already visited it several times and am always impressed."</p>
+        <p class="review-author">— Repeat Visitor</p>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div></div>
+        <p class="review-text">"A very surprising museum for real James Bond fans, with an impressive story about the origin of the museum. Here you will find objects that you will not find in any other museum."</p>
+        <p class="review-author">— International Visitor</p>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div><div class="review-star"></div></div>
+        <p class="review-text">"It's a must see and hear experience. Very special and definitely worth a visit! The best one is the air ship from Die Another Day. A lot of very fancy details."</p>
+        <p class="review-author">— Verified Visitor</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section class="visit-section" id="visit">
+  <div class="section-inner">
+    <div style="text-align: center; margin-bottom: 5rem;">
+      <p class="section-label">Plan Your Visit</p>
+      <h2 class="section-title">Find Us in <em>Nybro</em></h2>
+      <div class="gold-rule" style="margin: 1.5rem auto;"></div>
+    </div>
+    <div class="visit-grid">
+      <div>
+        <div class="visit-info-block">
+          <h3>Admission</h3>
+          <p>General admission to the James Bond 007 Museum is <strong>250 SEK</strong> per person — a singular experience unlike anything else in the world.</p>
+          <div class="price-badge">250 SEK — Entry</div>
+        </div>
+        <div class="visit-info-block">
+          <h3>Location</h3>
+          <p>
+            <strong>James Bond 007 Museum</strong><br>
+            Nybro, Sweden<br><br>
+            Open by arrangement — contact us directly to book your visit. Group visits welcome.
+          </p>
+        </div>
+        <div class="visit-info-block" id="contact">
+          <h3>Contact</h3>
+          <div class="visit-contact">
+            <a href="tel:+46734477007">+46 734 477 007</a>
+            <a href="mailto:nybrobildelar@gmail.com">nybrobildelar@gmail.com</a>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="map-placeholder">
+          <iframe
+            src="https://maps.google.com/maps?q=Nybro,+Sweden&z=13&output=embed"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            title="James Bond Museum location in Nybro, Sweden">
+          </iframe>
+          <div class="map-overlay">
+            <div class="map-pin"></div>
+          </div>
+          <div class="map-address-tag">
+            <strong>Nybro, Sweden</strong>
+            <span>James Bond 007 Museum</span>
+          </div>
+        </div>
+        <p style="font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; line-height: 1.8; margin-top: 1.5rem;">
+          Nybro is situated in Småland, southeastern Sweden, easily accessible by car via E22 or by train on the Kust-till-kust line. We recommend contacting us in advance to ensure the best possible visit experience.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">James Bond 007 Museum &nbsp;·&nbsp; Nybro, Sweden</div>
+    <div class="footer-copy">Est. 1965 &nbsp;·&nbsp; © 2026 James Bond Gunnar Schäfer</div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+</script>
+</body>
+</html>
